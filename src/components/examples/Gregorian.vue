@@ -1,6 +1,10 @@
 <template>
     <card title="Gregorian datepicker" version="2.0.0">
 
+        <date-picker locale="es" format="YYYY-MM-DD"></date-picker>
+        <br/>
+        <date-picker locale="es" type="time"></date-picker>
+        <br/>
         <date-picker locale="en"></date-picker>
         <br/>
         <date-picker locale="en,fa" format="YYYY/M/D"></date-picker>
@@ -8,6 +12,12 @@
         <date-picker locale="fa,en"></date-picker>
 
         <template slot="code">
+            <highlight-code lang="html" v-pre>
+                &lt;date-picker locale="es" format="YYYY-MM-DD"&gt;&lt;/date-picker&gt;
+            </highlight-code>
+            <highlight-code lang="html" v-pre>
+                &lt;date-picker locale="es" type="time"&gt;&lt;/date-picker&gt;
+            </highlight-code>
             <highlight-code lang="html" v-pre>
                 &lt;date-picker locale="en"&gt;&lt;/date-picker&gt;
             </highlight-code>

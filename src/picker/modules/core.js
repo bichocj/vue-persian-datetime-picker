@@ -1,10 +1,12 @@
 import moment from 'moment-jalaali';
 import fa from './moment.locale.fa';
+import es from './moment.locale.es';
 import utils from './utils';
 moment.updateLocale('en', {
     weekdaysMin: 'S_M_T_W_T_F_S'.split('_')
 });
 moment.updateLocale('fa', fa);
+moment.updateLocale('es', es);
 moment.loadPersian({dialect: 'persian-modern'});
 moment.daysInMonth = function (year, month) {
     return moment({year, month}).daysInMonth();
@@ -23,6 +25,13 @@ const localMethods = {
         day:         'day',
     },
     en: {
+        daysInMonth: 'daysInMonth',
+        year:        'year',
+        month:       'month',
+        date:        'date',
+        day:         'day'
+    },
+    es: {
         daysInMonth: 'daysInMonth',
         year:        'year',
         month:       'month',
@@ -51,6 +60,17 @@ const localesConfig = {
             now:       "Now",
             nextMonth: "Next month",
             prevMonth: "Previous month",
+        }
+    },
+    es: {
+        dow: 0,
+        dir: 'ltr',
+        lang: {
+            submit:    "Ok",
+            cancel:    "Cancelar",
+            now:       "Ahora",
+            nextMonth: "Siguiente mes",
+            prevMonth: "Mes anterior",
         }
     }
 };

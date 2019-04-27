@@ -1172,7 +1172,7 @@
             },
             locale: {
                 handler(val) {
-                    let allowedLocales = ['fa', 'en'];
+                    let allowedLocales = ['fa', 'en', 'es'];
                     let locales = val.toString().split(',').filter(i => allowedLocales.indexOf(i) !== -1);
                     this.locales = locales.length ? locales:['fa'];
                     this.setLocale(this.locales[0]);
