@@ -563,7 +563,7 @@
              * @supported fa,en
              * @version 2.0.0
              */
-            locale: {type: String, 'default': 'fa'},
+            locale: {type: String, 'default': 'en'},
 
             /**
              * Locale configuration
@@ -590,7 +590,7 @@
 
         },
         data() {
-            let coreModule = new CoreModule('fa');
+            let coreModule = new CoreModule('en');
             return {
                 core: coreModule,
                 now: coreModule.moment(),
@@ -619,7 +619,7 @@
                 maxDate: false,
                 output: '',
                 updateNowInterval: null,
-                locales: ['fa'],
+                locales: ['en'],
                 localeData: coreModule.locale
             }
         },
@@ -1110,14 +1110,14 @@
                 if (!this.output) return '';
                 let output = this.output.clone();                
                 let format = this.selfFormat;
-                if (/j\w/.test(format)) output.locale('fa');
+                if (/j\w/.test(format)) output.locale('en');
                 return output.format(format);
             },
             displayValue() {
                 if (!this.output) return '';
                 let output = this.output.clone();
                 let format = this.displayFormat || this.selfFormat;
-                if (/j\w/.test(format)) output.locale('fa');
+                if (/j\w/.test(format)) output.locale('en');
                 return output.format(format);
             },
             isDisableTime() {
@@ -1232,9 +1232,9 @@
             },
             locale: {
                 handler(val) {
-                    let allowedLocales = ['fa', 'en', 'es'];
+                    let allowedLocales = ['en', 'es'];
                     let locales = val.toString().split(',').filter(i => allowedLocales.indexOf(i) !== -1);
-                    this.locales = locales.length ? locales:['fa'];
+                    this.locales = locales.length ? locales:['en'];
                     this.setLocale(this.locales[0]);
                 },
                 immediate: true

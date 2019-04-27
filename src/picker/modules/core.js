@@ -1,12 +1,12 @@
 import moment from 'moment';
 // import fa from './moment.locale.fa';
-import es from './moment.locale.es';
+// import es from './moment.locale.es';
 import utils from './utils';
 moment.updateLocale('en', {
     weekdaysMin: 'S_M_T_W_T_F_S'.split('_')
 });
 // moment.updateLocale('fa', fa);
-moment.updateLocale('es', es);
+// moment.updateLocale('es', es);
 // moment.loadPersian({dialect: 'persian-modern'});
 moment.daysInMonth = function (year, month) {
     return moment({year, month}).daysInMonth();
