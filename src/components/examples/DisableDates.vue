@@ -187,7 +187,7 @@
 </template>
 
 <script>
-    import moment from 'moment-jalaali';
+    import moment from 'moment';
     export default {
         data() {
             return {

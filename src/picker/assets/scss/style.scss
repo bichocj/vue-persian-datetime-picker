@@ -443,6 +443,20 @@
 	}
 }
 
+.t-a {
+	.#{$prefix}time-h,
+	.#{$prefix}time-m,
+	.#{$prefix}time-a {
+		width: 32%;
+		.counter {
+			font-size: 80px;		
+			.counter-item {
+				width: 45px !important;
+			}
+		}
+	}
+}
+
 .#{$prefix}prev-step{
 	position: absolute;
 	top: 0;

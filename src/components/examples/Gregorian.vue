@@ -5,11 +5,13 @@
         <br/>
         <date-picker locale="es" type="time"></date-picker>
         <br/>
+        <date-picker locale="es" type="time-a"></date-picker>
+        <br/>
         <date-picker locale="en"></date-picker>
         <br/>
-        <date-picker locale="en,fa" format="YYYY/M/D"></date-picker>
+        <date-picker locale="en,es" format="YYYY/M/D"></date-picker>
         <br/>
-        <date-picker locale="fa,en"></date-picker>
+        <date-picker locale="es,en"></date-picker>
 
         <template slot="code">
             <highlight-code lang="html" v-pre>
@@ -22,10 +24,10 @@
                 &lt;date-picker locale="en"&gt;&lt;/date-picker&gt;
             </highlight-code>
             <highlight-code lang="html" v-pre>
-                &lt;date-picker locale="en,fa" format="YYYY/M/D"&gt;&lt;/date-picker&gt;
+                &lt;date-picker locale="en,es" format="YYYY/M/D"&gt;&lt;/date-picker&gt;
             </highlight-code>
             <highlight-code lang="html" v-pre>
-                &lt;date-picker locale="fa,en"&gt;&lt;/date-picker&gt;
+                &lt;date-picker locale="es,en"&gt;&lt;/date-picker&gt;
             </highlight-code>
         </template>
 
@@ -34,7 +36,7 @@
                 "locale"
                 type: String
                 default: "fa"
-                example: "fa" | "en" | "en,fa" | "fa,en" // ordering is important!
+                example: "fa" | "en" | "en,fa" | "es,en" // ordering is important!
                 /*******************************/
                 "localeConfig"
                 type: Object

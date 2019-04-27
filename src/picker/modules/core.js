@@ -1,13 +1,13 @@
-import moment from 'moment-jalaali';
-import fa from './moment.locale.fa';
+import moment from 'moment';
+// import fa from './moment.locale.fa';
 import es from './moment.locale.es';
 import utils from './utils';
 moment.updateLocale('en', {
     weekdaysMin: 'S_M_T_W_T_F_S'.split('_')
 });
-moment.updateLocale('fa', fa);
+// moment.updateLocale('fa', fa);
 moment.updateLocale('es', es);
-moment.loadPersian({dialect: 'persian-modern'});
+// moment.loadPersian({dialect: 'persian-modern'});
 moment.daysInMonth = function (year, month) {
     return moment({year, month}).daysInMonth();
 };
@@ -17,13 +17,13 @@ moment.daysInMonth = function (year, month) {
 //           CONFIG
 //=====================================
 const localMethods = {
-    fa: {
+    /*fa: {
         daysInMonth: 'jDaysInMonth',
         year:        'jYear',
         month:       'jMonth',
         date:        'jDate',
         day:         'day',
-    },
+    },*/
     en: {
         daysInMonth: 'daysInMonth',
         year:        'year',
@@ -40,7 +40,7 @@ const localMethods = {
     }
 };
 const localesConfig = {
-    fa: {
+    /*fa: {
         dow: 6,
         dir: 'rtl',
         lang: {
@@ -50,7 +50,7 @@ const localesConfig = {
             nextMonth: "ماه بعد",
             prevMonth: "ماه قبل",
         }
-    },
+    },*/
     en: {
         dow: 0,
         dir: 'ltr',
@@ -82,7 +82,7 @@ const Core = function (defaultLocaleName) {
 
     const Instance = {
         moment:        moment,
-        locale:        {name: 'fa', config: {}},
+        locale:        {name: 'en', config: {}},
         changeLocale:  null,
         getWeekArray:  null,
         getYearsList:  null,
@@ -94,11 +94,10 @@ const Core = function (defaultLocaleName) {
     //=====================================
     let xDaysInMonth;
 
-    Instance.changeLocale = function changeLocale(localeName = 'fa', options = {}) {
-
+    Instance.changeLocale = function changeLocale(localeName = 'en', options = {}) {        
         let locale    = this.locale;
-        let config    = JSON.parse(JSON.stringify((localesConfig[localeName] || localesConfig.fa)));
-        let methods   = localMethods[localeName] || localMethods.fa;
+        let config    = JSON.parse(JSON.stringify((localesConfig[localeName] || localesConfig.en)));
+        let methods   = localMethods[localeName] || localMethods.en;
 
         options       = options[localeName] || {};
         locale.name   = localeName;
@@ -110,7 +109,7 @@ const Core = function (defaultLocaleName) {
             if (date === undefined) return;
 
             const nameInLocale = name => {
-                if (locale.name !== 'fa')
+                if (locale.name !== 'en')
                     name = name.replace(/j/g, '');
                 return name;
             };

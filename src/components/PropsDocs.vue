@@ -26,7 +26,7 @@
                  * @default Null
                  * @example jYYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
                  * @if empty {inputFormat} = {format}
-                 * @see https://github.com/jalaali/moment-jalaali
+                 * @see https://github.com/jalaali/moment
                  */
                 inputFormat: 'jYYYY/jMM/jDD HH:mm',
 
@@ -36,7 +36,7 @@
                 * @default Null
                 * @example jYYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
                 * @if empty {displayFormat} = {format}
-                * @see https://github.com/jalaali/moment-jalaali
+                * @see https://github.com/jalaali/moment
                 */
                 displayFormat: {type: String, 'default': ''},
 
@@ -53,7 +53,7 @@
                  * --- year:     jYYYY
                  * --- month:    jMM
                  *
-                 * @see https://github.com/jalaali/moment-jalaali
+                 * @see https://github.com/jalaali/moment
                  */
                 format: 'jYYYY/jMM/jDD HH:mm',
 

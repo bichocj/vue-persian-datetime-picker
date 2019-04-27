@@ -48,7 +48,7 @@
                     &lt;span&gt;{{ date }}&lt;/span&gt;
                 </highlight-code>
                 <highlight-code lang="javascript" v-pre>
-                    import moment from 'moment-jalaali';
+                    import moment from 'moment';
                     export default {
                         data(){
                             return {
@@ -109,7 +109,7 @@
 
 <script>
 
-    import moment from 'moment-jalaali';
+    import moment from 'moment';
 
     export default {
 

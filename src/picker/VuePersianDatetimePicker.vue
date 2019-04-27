@@ -57,7 +57,7 @@
                             </div>
                             <div :class="[prefix('date'), directionClass]" :style="{'font-size': type=='datetime'? '22px':''}">
                                 <transition name="slideY">
-                                    <span :key="formattedDate">{{ formattedDate }}</span>
+                                    <span :key="formattedDate"> {{ formattedDate }}</span>
                                 </transition>
                             </div>
                             <ul v-if="locales.length > 1" :class="[prefix('locales')]">
@@ -191,6 +191,62 @@
                             </transition>
 
                             <transition name="fade">
+                                <div v-if="hasStep('t-a')"
+                                     :class="[prefix('addon-list'), prefix('time'), {disabled: isDisableTime}, 't-a']"
+                                     v-show="currentStep == 't-a'"
+                                     ref="time">
+                                    <div :class="[prefix('addon-list-content')]">
+                                        <div :class="[prefix('time-h'), classFastCounter]">
+                                            <btn class="up-arrow-btn" @update="setTime(1, 'h')" @fastUpdate="fastUpdateCounter">
+                                                <arrow width="20" direction="up"></arrow>
+                                            </btn>
+                                            <div class="counter" :class="directionClassTime" @mousewheel.stop.prevent="wheelSetTime('h',$event)">
+                                                <div class="counter-item" v-for="item, i in time.format('hh').split('')" v-bind="timeAttributes">
+                                                    <transition name="slideY">
+                                                        <span :key="item + '_' + i" :style="{transition: 'all ' + timeData.transitionSpeed + 'ms ease-in-out'}">{{ item }}</span>
+                                                    </transition>
+                                                </div>
+                                            </div>
+                                            <btn class="down-arrow-btn" @update="setTime(-1, 'h')" @fastUpdate="fastUpdateCounter">
+                                                <arrow width="20" direction="down"></arrow>
+                                            </btn>
+                                        </div>
+                                        <div :class="[prefix('time-m'), classFastCounter]">
+                                            <btn class="up-arrow-btn" @update="setTime(jumpMinute, 'm')" @fastUpdate="fastUpdateCounter">
+                                                <arrow width="20" direction="up"></arrow>
+                                            </btn>
+                                            <div class="counter" :class="directionClassTime" @mousewheel.stop.prevent="wheelSetTime('m',$event)">
+                                                <div class="counter-item" v-for="item, i in time.format('mm').split('')" v-bind="timeAttributes">
+                                                    <transition name="slideY">
+                                                        <span :key="item + '_' + i" :style="{transition: 'all ' + timeData.transitionSpeed + 'ms ease-in-out'}">{{ item }}</span>
+                                                    </transition>
+                                                </div>
+                                            </div>
+                                            <btn class="down-arrow-btn" @update="setTime(-jumpMinute, 'm')" @fastUpdate="fastUpdateCounter">
+                                                <arrow width="20" direction="down"></arrow>
+                                            </btn>
+                                        </div>
+
+                                        <div :class="[prefix('time-m'), classFastCounter]">
+                                            <btn class="up-arrow-btn" @update="setTime(jumpMinute, 'm')" @fastUpdate="fastUpdateCounter">
+                                                <arrow width="20" direction="up"></arrow>
+                                            </btn>
+                                            <div class="counter" :class="directionClassTime" @mousewheel.stop.prevent="wheelSetTime('m',$event)">
+                                                <div class="counter-item" v-for="item, i in time.format('a').split('')" v-bind="timeAttributes">
+                                                    <transition name="slideY">
+                                                        <span :key="item + '_' + i" :style="{transition: 'all ' + timeData.transitionSpeed + 'ms ease-in-out'}">{{ item }}</span>
+                                                    </transition>
+                                                </div>
+                                            </div>
+                                            <btn class="down-arrow-btn" @update="setTime(-jumpMinute, 'm')" @fastUpdate="fastUpdateCounter">
+                                                <arrow width="20" direction="down"></arrow>
+                                            </btn>
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition>
+
+                            <transition name="fade">
                                 <span :class="[prefix('close-addon')]" v-if="steps.length > 1 && (currentStep != 'd')" @click="goStep('d')">x</span>
                             </transition>
 
@@ -262,7 +318,7 @@
              * @default Null
              * @example jYYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
              * @if empty {inputFormat} = {format}
-             * @see https://github.com/jalaali/moment-jalaali
+             * @see https://github.com/jalaali/moment
              */
             inputFormat: {type: String, 'default': ''},
 
@@ -272,7 +328,7 @@
              * @default Null
              * @example jYYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
              * @if empty {displayFormat} = {format}
-             * @see https://github.com/jalaali/moment-jalaali
+             * @see https://github.com/jalaali/moment
              */
             displayFormat: {type: String, 'default': ''},
 
@@ -289,7 +345,7 @@
              * --- year:     jYYYY
              * --- month:    jMM
              *
-             * @see https://github.com/jalaali/moment-jalaali
+             * @see https://github.com/jalaali/moment
              */
             format: {type: String, 'default': ''},
 
@@ -307,7 +363,7 @@
              * The picker type
              * @type String
              * @default "date"
-             * @supported date | datetime | year | month | time
+             * @supported date | datetime | year | month | time | time-a
              */
             type: {type: String, 'default': 'date'},
 
@@ -625,9 +681,8 @@
                 this.date = this.date.clone().xMonth(month.xMonth());
                 this.nextStep();
             },
-            setTime(v, k){
-
-                let  time = this.time.clone();
+            setTime(v, k){                
+                let  time = this.time.clone();                
 
                 if (this.type === 'time' && k === 'm' && this.roundMinute) {
                     let x = v - (time.minute() % v);
@@ -661,7 +716,7 @@
             wheelSetTime(k, e){
                 this.setTime(e.wheelDeltaY > 0 ? this.jumpMinute:-this.jumpMinute, k);
             },
-            submit(){
+            submit(){                
                 if(this.hasStep('t')){
                     let t = {hour: this.time.hour(), minute: this.time.minute()};
                     this.date = this.date.set(t).clone();
@@ -675,8 +730,7 @@
                 this.$emit('input',  this.outputValue);
                 this.$emit('change', this.selectedDate.clone());
             },
-            updateDates(d){
-
+            updateDates(d){                
                 if (null === d || typeof d !== 'object')
                     d = this.getMoment(d ? d : (this.value || this.initialValue));
 
@@ -733,6 +787,10 @@
                     case 'time':
                         this.steps = ['t'];
                         this.goStep('t');
+                        break;
+                    case 'time-a':
+                        this.steps = ['t-a'];
+                        this.goStep('t-a');
                         break;
                 }
             },
@@ -916,13 +974,14 @@
             currentStep(){
                 return this.steps[this.step];
             },
-            formattedDate(){
+            formattedDate(){                
                 let t = this.steps;
                 let f = '';
                 if(t.indexOf('y') !== -1) { f = 'jYYYY' }
                 if(t.indexOf('m') !== -1) { f += ' jMMMM ' }
                 if(t.indexOf('d') !== -1) { f = 'ddd jDD jMMMM' }
                 if(t.indexOf('t') !== -1) { f += ' HH:mm ' }
+                if(t.indexOf('t-a') !== -1) { f += ' hh:mm a' }
                 return f ? this.selectedDate.xFormat(f):'';
             },
             month(){
@@ -1035,6 +1094,7 @@
                 if(format === '' || format === undefined){
                     switch (this.type){
                         case 'time':     format = 'HH:mm'; break;
+                        case 'time-a':     format = 'hh:mm a'; break;
                         case 'datetime': format = 'jYYYY/jMM/jDD HH:mm'; break;
                         case 'date':     format = 'jYYYY/jMM/jDD'; break;
                         case 'year':     format = 'jYYYY'; break;
@@ -1048,7 +1108,7 @@
             },
             outputValue() {
                 if (!this.output) return '';
-                let output = this.output.clone();
+                let output = this.output.clone();                
                 let format = this.selfFormat;
                 if (/j\w/.test(format)) output.locale('fa');
                 return output.format(format);
@@ -1133,7 +1193,7 @@
                 },
                 immediate: true
             },
-            selectedDate(val, old){
+            selectedDate(val, old){                
                 this.setDirection('directionClass', val, old);
             },
             date(val, old){

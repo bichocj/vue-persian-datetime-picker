@@ -31,7 +31,7 @@
                         dddd jDD jMMMM jYYYY ساعت HH:mm  //{{ moment().format('dddd jDD jMMMM jYYYY ساعت HH:mm') }}
 
                 </highlight-code>
-                See <a href="https://github.com/jalaali/moment-jalaali" target="_blank">moment-jalaali</a>
+                See <a href="https://github.com/jalaali/moment" target="_blank">moment</a>
             </template>
         </card>
 
@@ -83,7 +83,7 @@
 
 <script>
 
-    import moment from 'moment-jalaali'
+    import moment from 'moment'
 
     export default {
 

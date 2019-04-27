@@ -25,7 +25,7 @@
     "buildAll": "npm run build && npm run export && npm run browser"
   },
   "dependencies": {
-    "moment-jalaali": "^0.7.3"
+    "moment": "^2.24.0"
   },
   "repository": {
     "type": "git",
