@@ -1,3 +1,10 @@
+# Custom to have 'en/es' lang and 'am/pm' component
+
+![alt text](https://github.com/bichocj/vue-persian-datetime-picker/blob/master/demo.jpg?raw=true)
+```
+<date-picker locale="es" type="time-a"></date-picker>
+```
+
 # vue-persian-datetime-picker
 
 [![npm version](https://badge.fury.io/js/vue-persian-datetime-picker.svg)](https://www.npmjs.com/package/vue-persian-datetime-picker)
