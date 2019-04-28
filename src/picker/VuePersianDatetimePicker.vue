@@ -6,11 +6,11 @@
                    :style="{'background-color': color}"
                    @click.prevent.stop="visible=true">
                 <slot name="label">
-                    <time-icon v-if="type=='time'" width="16px" height="16px"></time-icon>
+                    <time-icon v-if="type=='time' || type=='time-a'" width="16px" height="16px"></time-icon>
                     <calendar-icon v-else="" width="16px" height="16px"></calendar-icon>
                     <span v-if="label">{{ label }}</span>
                 </slot>
-            </label>
+            </label>            
             <input type="text"
                    :id="id"
                    :name="name"
@@ -19,7 +19,7 @@
                    :value="displayValue"
                    :disabled="disabled"
                    @focus="focus"
-                   @blur="setOutput">
+                   @blur="setOutput">            
             <input v-if="altName" type="hidden" :name="altName" :value="altFormatted"/>
 
             <i v-if="clearable && !disabled && displayValue"
@@ -86,7 +86,7 @@
                                     </button>
                                     <transition name="slideX">
                                         <div :class="[prefix('month-label')]" :key="date.xMonth()" @click="goStep('m')">
-                                            <span :style="{'border-color': color, color: color}">{{ date.xFormat('jMMMM jYYYY') }}</span>
+                                            <span :style="{'border-color': color, color: color}">{{ date.xFormat('MMMM YYYY') }}</span>
                                         </div>
                                     </transition>
                                 </div>
@@ -128,7 +128,7 @@
                                              :style="[{color: year.selected?color:''}, year.attributes.style]"
                                              :disabled="year.disabled"
                                              @click="selectYear(year)"
-                                        >{{ year.xFormat('jYYYY') }}</div>
+                                        >{{ year.xFormat('YYYY') }}</div>
                                     </div>
                                 </div>
                             </transition>
@@ -145,7 +145,7 @@
                                              :class="[prefix('addon-list-item'), {selected: month.selected }, month.attributes.class]"
                                              :disabled="month.disabled"
                                              :style="[{color: month.selected?color:''}, month.attributes.style]"
-                                        >{{ month.xFormat('jMMMM') }}</div>
+                                        >{{ month.xFormat('MMMM') }}</div>
                                     </div>
                                 </div>
                             </transition>
@@ -227,18 +227,21 @@
                                             </btn>
                                         </div>
 
+
+
+
                                         <div :class="[prefix('time-m'), classFastCounter]">
-                                            <btn class="up-arrow-btn" @update="setTime(jumpMinute, 'm')" @fastUpdate="fastUpdateCounter">
+                                            <btn class="up-arrow-btn" @update="setTime(12, 'h')" @fastUpdate="fastUpdateCounter">
                                                 <arrow width="20" direction="up"></arrow>
                                             </btn>
-                                            <div class="counter" :class="directionClassTime" @mousewheel.stop.prevent="wheelSetTime('m',$event)">
+                                            <div class="counter" :class="directionClassTime">
                                                 <div class="counter-item" v-for="item, i in time.format('a').split('')" v-bind="timeAttributes">
                                                     <transition name="slideY">
                                                         <span :key="item + '_' + i" :style="{transition: 'all ' + timeData.transitionSpeed + 'ms ease-in-out'}">{{ item }}</span>
                                                     </transition>
                                                 </div>
                                             </div>
-                                            <btn class="down-arrow-btn" @update="setTime(-jumpMinute, 'm')" @fastUpdate="fastUpdateCounter">
+                                            <btn class="down-arrow-btn" @update="setTime(-12, 'h')" @fastUpdate="fastUpdateCounter">
                                                 <arrow width="20" direction="down"></arrow>
                                             </btn>
                                         </div>
@@ -250,7 +253,7 @@
                                 <span :class="[prefix('close-addon')]" v-if="steps.length > 1 && (currentStep != 'd')" @click="goStep('d')">x</span>
                             </transition>
 
-                            <br v-if="autoSubmit && !hasStep('t')">
+                            <br v-if="autoSubmit && (!hasStep('t') || !hasStep('t-a'))">
 
                             <div :class="[prefix('actions')]" v-else>
                                 <button type="button"
@@ -316,7 +319,7 @@
              * Format for {value}
              * @type String
              * @default Null
-             * @example jYYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
+             * @example YYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
              * @if empty {inputFormat} = {format}
              * @see https://github.com/jalaali/moment
              */
@@ -326,7 +329,7 @@
              * Format only to display the date in the field
              * @type String
              * @default Null
-             * @example jYYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
+             * @example YYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
              * @if empty {displayFormat} = {format}
              * @see https://github.com/jalaali/moment
              */
@@ -336,13 +339,13 @@
              * Format for output value
              * @type String
              * @default Null
-             * @example jYYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
+             * @example YYYY/jMM/jDD HH:mm | YYYY/MM/DD HH:mm | x | unix | HH:mm
              * @if empty, it will be built according to the type of picker:
              *
              * --- time:     HH:mm
-             * --- datetime: jYYYY/jMM/jDD HH:mm
-             * --- date:     jYYYY/jMM/jDD
-             * --- year:     jYYYY
+             * --- datetime: YYYY/jMM/jDD HH:mm
+             * --- date:     YYYY/jMM/jDD
+             * --- year:     YYYY
              * --- month:    jMM
              *
              * @see https://github.com/jalaali/moment
@@ -601,13 +604,14 @@
                 directionClassDate: '',
                 directionClassTime: '',
                 classFastCounter: '',
-                steps: ['y', 'm', 'd', 't'],
+                steps: ['y', 'm', 'd', 't', 't-a'],
                 step: 0,
                 shortCodes: {
                     'year':  'y',
                     'month': 'm',
                     'day':   'd',
                     'time':  't',
+                    'time-a':  't-a',
                 },
                 time: {},
                 timeData: {
@@ -682,16 +686,15 @@
                 this.nextStep();
             },
             setTime(v, k){                
-                let  time = this.time.clone();                
-
-                if (this.type === 'time' && k === 'm' && this.roundMinute) {
+                let  time = this.time.clone();                       
+                if ((this.type === 'time' || this.type === 'time-a') && k === 'm' && this.roundMinute) {
                     let x = v - (time.minute() % v);
                     time.add({[k]: x})
                 } else {
                     time.add({[k]: v})
-                }
+                }                
 
-                if(this.type !== 'time'){
+                if(this.type !== 'time' && this.type !== 'time-a'){
                     let date = this.date.clone();
                     time.set({year: date.year(), month: date.month(), date: date.date()});
                     date.set({hour: time.hour(), minute: time.minute()});
@@ -699,8 +702,7 @@
                 }
 
                 if(this.isLower(time)) time = this.minDate.clone();
-                if(this.isMore(time)) time = this.maxDate.clone();
-
+                if(this.isMore(time)) time = this.maxDate.clone();                
                 this.time = time;
 
                 let now = new Date().getTime(), def = now - this.timeData.lastUpdate;
@@ -722,6 +724,11 @@
                     this.date = this.date.set(t).clone();
                     this.selectedDate = this.selectedDate.set(t).clone();
                 }
+                if(this.hasStep('t-a')){                    
+                    let t = {hour: this.time.hour(), minute: this.time.minute()};
+                    this.date = this.date.set(t).clone();
+                    this.selectedDate = this.selectedDate.set(t).clone();
+                }
 
                 if(['year', 'month'].indexOf(this.type) !== -1) this.selectedDate = this.date.clone();
                 this.output = this.selectedDate.clone();
@@ -736,7 +743,7 @@
 
                 this.date = d.isValid() ? d : this.core.moment();
 
-                if (!this.hasStep('t')) this.date.set({hour: 0, minute: 0, second: 0});
+                if (!this.hasStep('t') && !this.hasStep('t-a')) this.date.set({hour: 0, minute: 0, second: 0});
 
                 if (this.isLower(this.date)) {
                     this.date = this.minDate.clone();
@@ -747,7 +754,7 @@
                 this.selectedDate = this.date.clone();
                 this.time = this.date.clone();
 
-                if (this.type === 'time' && this.roundMinute) {
+                if ((this.type === 'time' || this.type === 'time-a') && this.roundMinute) {
                     let x = (this.jumpMinute - (this.time.minute() % this.jumpMinute)) % this.jumpMinute;
                     this.time.add({['m']: x})
                 }
@@ -761,7 +768,7 @@
             },
             goToday(){
                 let now = this.core.moment();
-                if (!this.hasStep('t')) now.set({hour: 0, minute: 0, second: 0});
+                if (!this.hasStep('t') || !this.hasStep('t-a') ) now.set({hour: 0, minute: 0, second: 0});
                 this.date = now.clone();
                 this.time = now.clone();
                 this.selectedDate = now.clone();
@@ -823,7 +830,7 @@
                             if (this.type === 'month') {
                                 a.xYear(year);
                                 b.xYear(year);
-                            } else if (this.type === 'time') {
+                            } else if (this.type === 'time' || this.type === 'time-a') {
                                 a = now.clone().set({
                                     h: a.hour(),
                                     m: a.minute(),
@@ -929,13 +936,13 @@
                     return false;
                 };
 
-                if (item === 'y') value = this.core.moment(value, 'jYYYY');
+                if (item === 'y') value = this.core.moment(value, 'YYYY');
                 return check(value, value.format(this.selfFormat));
             },
             getHighlights(item, value) {
                 let highlight = this.highlight;
                 if (!highlight || typeof highlight !== 'function') return {};
-                if (item === 'y') value = this.core.moment(value, 'jYYYY');
+                if (item === 'y') value = this.core.moment(value, 'YYYY');
                 return this.applyDevFn(highlight, item, value.format(this.selfFormat), value.clone()) || {};
             },
             isLower(date) {
@@ -974,12 +981,12 @@
             currentStep(){
                 return this.steps[this.step];
             },
-            formattedDate(){                
+            formattedDate(){                                
                 let t = this.steps;
                 let f = '';
-                if(t.indexOf('y') !== -1) { f = 'jYYYY' }
-                if(t.indexOf('m') !== -1) { f += ' jMMMM ' }
-                if(t.indexOf('d') !== -1) { f = 'ddd jDD jMMMM' }
+                if(t.indexOf('y') !== -1) { f = 'YYYY' }
+                if(t.indexOf('m') !== -1) { f += ' MMMM ' }
+                if(t.indexOf('d') !== -1) { f = 'ddd DD MMMM' }
                 if(t.indexOf('t') !== -1) { f += ' HH:mm ' }
                 if(t.indexOf('t-a') !== -1) { f += ' hh:mm a' }
                 return f ? this.selectedDate.xFormat(f):'';
@@ -1016,8 +1023,8 @@
             years(){
                 if(!this.hasStep('y') || this.currentStep !== 'y') return [];
                 let moment = this.core.moment;
-                let min = this.minDate ? this.minDate.xYear():moment('1300', 'jYYYY').xYear();
-                let max = this.maxDate ? this.maxDate.xYear():moment('1430', 'jYYYY').xYear();
+                let min = this.minDate ? this.minDate.xYear():moment('1300', 'YYYY').xYear();
+                let max = this.maxDate ? this.maxDate.xYear():moment('1430', 'YYYY').xYear();
                 let cy = this.date.xYear();
                 return this.core.getYearsList(min, max).reverse().map(item => {
                     let year        = moment().xYear(item);
@@ -1081,6 +1088,7 @@
                 if(format === '' || format === undefined){
                     switch (this.type){
                         case 'time':     format = 'HH:mm:ss [GMT]ZZ'; break;
+                        case 'time-a':     format = 'hh:mm:ss a [GMT]ZZ'; break;
                         case 'datetime': format = 'YYYY-MM-DD HH:mm:ss [GMT]ZZ'; break;
                         case 'date':     format = 'YYYY-MM-DD'; break;
                         case 'year':     format = 'YYYY'; break;
@@ -1095,10 +1103,10 @@
                     switch (this.type){
                         case 'time':     format = 'HH:mm'; break;
                         case 'time-a':     format = 'hh:mm a'; break;
-                        case 'datetime': format = 'jYYYY/jMM/jDD HH:mm'; break;
-                        case 'date':     format = 'jYYYY/jMM/jDD'; break;
-                        case 'year':     format = 'jYYYY'; break;
-                        case 'month':    format = 'jMM'; break;
+                        case 'datetime': format = 'YYYY/MM/DD HH:mm'; break;
+                        case 'date':     format = 'YYYY/MM/DD'; break;
+                        case 'year':     format = 'YYYY'; break;
+                        case 'month':    format = 'MM'; break;
                     }
                 }
                 return format;
@@ -1110,27 +1118,37 @@
                 if (!this.output) return '';
                 let output = this.output.clone();                
                 let format = this.selfFormat;
-                if (/j\w/.test(format)) output.locale('en');
+                // if (/j\w/.test(format)) output.locale('en');
                 return output.format(format);
             },
             displayValue() {
                 if (!this.output) return '';
                 let output = this.output.clone();
                 let format = this.displayFormat || this.selfFormat;
-                if (/j\w/.test(format)) output.locale('en');
+                // if (/j\w/.test(format)) output.locale('en');
                 return output.format(format);
             },
             isDisableTime() {
-                return (this.hasStep('t') && this.checkDisable('t', this.time));
+                if(this.hasStep('t')){
+                    return this.checkDisable('t', this.time)
+                }
+                return (this.hasStep('t-a') && this.checkDisable('t-a', this.time));
             },
             timeAttributes() {
-                return this.hasStep('t') ? this.getHighlights('t', this.time):{};
+                if(this.hasStep('t')){
+                    return this.getHighlights('t', this.time)
+                }
+                if(this.hasStep('t-a')){
+                    return this.getHighlights('t-a', this.time)
+                }
+                return {};
             },
             canSubmit() {
                 if (!this.disable) return true;
                 let can = true;
                 if (this.hasStep('t')) can = !this.isDisableTime;
-                if (can && this.type !== 'time') can = !this.checkDisable('d', this.date);
+                if (this.hasStep('t-a')) can = !this.isDisableTime;
+                if (can && ( this.type !== 'time' || this.type !== 'time-a' )) can = !this.checkDisable('d', this.date);
                 return can;
             },
             weekDays() {

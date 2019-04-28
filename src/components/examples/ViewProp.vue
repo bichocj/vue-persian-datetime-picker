@@ -1,7 +1,7 @@
 <template>
     <card title="VIEW: Show the 'Year' initially">
 
-        <date-picker v-model="date" format="jYYYY/jMM/jDD" view="year"></date-picker>
+        <date-picker v-model="date" format="YYYY/MM/DDD" view="year"></date-picker>
         <code class="code">{{ date }}</code>
 
         <template slot="code">
@@ -9,7 +9,7 @@
                 &lt;date-picker
                     v-model="date"
                     view="year"
-                    format="jYYYY/jMM/jDD"&gt;
+                    format="YYYY/MM/DDD"&gt;
                 &lt;/date-picker&gt;
             </highlight-code>
         </template>

@@ -1,14 +1,14 @@
 <template>
     <div>
         <card title="@input">
-            <date-picker value="1396/05/02" format="jYYYY/jMM/jDD" @input="date=$event"></date-picker>
+            <date-picker value="1396/05/02" format="YYYY/MM/DDD" @input="date=$event"></date-picker>
             <code class="code">{{ date }}</code>
 
             <template slot="code">
                 <highlight-code lang="html" v-pre>
                     &lt;date-picker
                         value="1396/05/02"
-                        format="jYYYY/jMM/jDD"
+                        format="YYYY/MM/DDD"
                         @input="date=$event"&gt;
                     &lt;/date-picker&gt;
                     &lt;span&gt;{{ date }}&lt;/span&gt;
@@ -31,7 +31,7 @@
         <card title="@change">
             <date-picker
                     v-model="date_1"
-                    format="jYYYY/jMM/jDD"
+                    format="YYYY/MM/DDD"
                     @change="dateMoment=$event"
             ></date-picker>
             <code class="code">{{ dateMoment.format('dddd jDD jMMMM jYYYY') }}</code>

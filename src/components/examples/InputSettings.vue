@@ -3,7 +3,7 @@
 
         <date-picker
                 v-model="date"
-                format="jYYYY/jMM/jDD"
+                format="YYYY/MM/DDD"
                 name="my_date"
                 input-class="form-control form-control-lg"
                 placeholder="Select a date"
@@ -14,7 +14,7 @@
             <highlight-code lang="html" v-pre>
                 &lt;date-picker
                     v-model="date"
-                    format="jYYYY/jMM/jDD"
+                    format="YYYY/MM/DDD"
                     input-class="form-control form-control-lg"
                     name="my_date"
                     placeholder="Select a date"&gt;

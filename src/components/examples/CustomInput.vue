@@ -5,7 +5,7 @@
 
         <date-picker
                 v-model="date"
-                format="jYYYY/jMM/jDD"
+                format="YYYY/MM/DDD"
                 element="my-custom-input"
         ></date-picker>
         <code class="code">{{ date }}</code>
@@ -21,7 +21,7 @@
 
                 &lt;date-picker
                     v-model="date"
-                    format="jYYYY/jMM/jDD"
+                    format="YYYY/MM/DDD"
                     element="my-custom-input"&gt;
                 &lt;/date-picker&gt;
             </highlight-code>

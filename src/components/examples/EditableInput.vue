@@ -1,7 +1,7 @@
 <template>
     <card title="Input editable for user">
 
-        <date-picker v-model="date" format="jYYYY/jMM/jDD" placeholder="YYYY/MM/DD" :editable="true"></date-picker>
+        <date-picker v-model="date" format="YYYY/MM/DDD" placeholder="YYYY/MM/DD" :editable="true"></date-picker>
         <code class="code">{{ date }}</code>
 
         <template slot="code">
@@ -14,7 +14,7 @@
             <highlight-code lang="html" v-pre>
                 &lt;date-picker
                     v-model="date"
-                    format="jYYYY/jMM/jDD"
+                    format="YYYY/MM/DDD"
                     placeholder="YYYY/MM/DD"
                     :editable="true"&gt;
                 &lt;/date-picker&gt;

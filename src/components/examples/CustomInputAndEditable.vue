@@ -13,7 +13,7 @@
 
         <date-picker
                 v-model="date"
-                format="jYYYY/jMM/jDD"
+                format="YYYY/MM/DDD"
                 element="my-custom-editable-input"
                 :editable="true"
                 :show="show"
@@ -39,7 +39,7 @@
 
                 &lt;date-picker
                     v-model="date"
-                    format="jYYYY/jMM/jDD"
+                    format="YYYY/MM/DDD"
                     element="my-custom-editable-input"
                     :editable="true"
                     :show="show"

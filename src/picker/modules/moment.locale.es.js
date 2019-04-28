@@ -1,7 +1,7 @@
-//! moment.js locale configuration
+//! moment.Js locale configuration
 
 
-
+/*
 var symbolMap = {
     '1': '1',
     '2': '2',
@@ -25,13 +25,13 @@ var symbolMap = {
     '۹': '9',
     '۰': '0'
 };
-
+*/
 export default {
-    months : 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembr'.split('_'),
-    monthsShort : 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
-    weekdays : 'lunes_martes_miercoles_jueves_viernes_sabado_domingo'.split('_'),
-    weekdaysShort : 'lun_mar_mie_jue_vie_sab_dom'.split('_'),
-    weekdaysMin : 'l_m_x_j_v_s_d'.split('_'),
+    months : 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+    monthsShort : 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
+    weekdays : 'Lunes_Martes_Miercoles_Jueves_viernes_Sabado_Domingo'.split('_'),
+    weekdaysShort : 'Lun_Mar_Mie_Jue_Vie_Sab_Dom'.split('_'),
+    weekdaysMin : 'L_M_X_J_V_S_D'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
         LT : 'HH:mm',
@@ -42,6 +42,7 @@ export default {
         LLLL : 'dddd, D MMMM YYYY HH:mm'
     },
     
+    /*
     meridiemParse: /قبل از ظهر|بعد از ظهر/,
     isPM: function (input) {
         return /بعد از ظهر/.test(input);
@@ -90,7 +91,7 @@ export default {
     },
     dayOfMonthOrdinalParse: /\d{1,2}م/,
     ordinal : '%dم',
-    
+    */
     week : {
         dow : 1, // Saturday is the first day of the week.
         doy : 12 // The week that contains Jan 1st is the first week of the year.

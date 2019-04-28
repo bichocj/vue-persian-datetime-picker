@@ -20,6 +20,10 @@
             <highlight-code lang="html" v-pre>
                 &lt;date-picker locale="es" type="time"&gt;&lt;/date-picker&gt;
             </highlight-code>
+            </highlight-code>
+            <highlight-code lang="html" v-pre>
+                &lt;date-picker locale="es" type="time-a"&gt;&lt;/date-picker&gt;
+            </highlight-code>
             <highlight-code lang="html" v-pre>
                 &lt;date-picker locale="en"&gt;&lt;/date-picker&gt;
             </highlight-code>

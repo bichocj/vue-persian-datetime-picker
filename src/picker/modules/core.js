@@ -1,12 +1,12 @@
 import moment from 'moment';
 // import fa from './moment.locale.fa';
-// import es from './moment.locale.es';
+import es from './moment.locale.es';
 import utils from './utils';
 moment.updateLocale('en', {
     weekdaysMin: 'S_M_T_W_T_F_S'.split('_')
 });
 // moment.updateLocale('fa', fa);
-// moment.updateLocale('es', es);
+moment.updateLocale('es', es);
 // moment.loadPersian({dialect: 'persian-modern'});
 moment.daysInMonth = function (year, month) {
     return moment({year, month}).daysInMonth();
@@ -109,8 +109,9 @@ const Core = function (defaultLocaleName) {
             if (date === undefined) return;
 
             const nameInLocale = name => {
-                if (locale.name !== 'en')
-                    name = name.replace(/j/g, '');
+                // if (locale.name !== 'en')
+                //    name = name.replace(/j/g, '');
+                // console.log('nameInLocale', name)
                 return name;
             };
 
@@ -118,7 +119,7 @@ const Core = function (defaultLocaleName) {
             date.xMonth = moment.fn[methods.month];
             date.xDate  = moment.fn[methods.date];
 
-            date.xFormat = function (format) {
+            date.xFormat = function (format) {                
                 return this.format(nameInLocale(format));
             };
             date.xStartOf = function (value) {
