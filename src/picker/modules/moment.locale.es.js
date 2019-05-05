@@ -29,9 +29,9 @@ var symbolMap = {
 export default {
     months : 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
     monthsShort : 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
-    weekdays : 'Lunes_Martes_Miercoles_Jueves_viernes_Sabado_Domingo'.split('_'),
-    weekdaysShort : 'Lun_Mar_Mie_Jue_Vie_Sab_Dom'.split('_'),
-    weekdaysMin : 'L_M_X_J_V_S_D'.split('_'),
+    weekdays : 'Domingo_Lunes_Martes_Miercoles_Jueves_viernes_Sabado'.split('_'),
+    weekdaysShort : 'Dom_Lun_Mar_Mie_Jue_Vie_Sab'.split('_'),
+    weekdaysMin : 'D_L_M_X_J_V_S'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
         LT : 'HH:mm',
@@ -93,7 +93,7 @@ export default {
     ordinal : '%dم',
     */
     week : {
-        dow : 1, // Saturday is the first day of the week.
+        dow : 0, // Saturday is the first day of the week.
         doy : 12 // The week that contains Jan 1st is the first week of the year.
     }
 };
