@@ -53,7 +53,7 @@ const localesConfig = {
     },*/
     en: {
         dow: 0,
-        dir: 'ltr',
+        dir: 'rtl',
         lang: {
             submit:    "Select",
             cancel:    "Cancel",
@@ -64,9 +64,9 @@ const localesConfig = {
     },
     es: {
         dow: 0,
-        dir: 'ltr',
+        dir: 'rtl',
         lang: {
-            submit:    "Ok",
+            submit:    "Aceptar",
             cancel:    "Cancelar",
             now:       "Ahora",
             nextMonth: "Siguiente mes",

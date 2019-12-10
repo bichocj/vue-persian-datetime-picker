@@ -265,16 +265,7 @@
                                         @click="submit()"
                                         :disabled="!canSubmit"
                                         :style="{'color': color}"
-                                >{{ lang.submit }}</button> 
-
-                                <!-- 
-                                    
-                                <button v-if="!inline"
-                                        type="button"
-                                        @click="visible=false"
-                                        :style="{'color': color}"
-                                >{{ lang.cancel }}</button>
-                                -->                       
+                                >{{ lang.submit }}</button>                      
                             </div>
                         </div>
                     </div>
