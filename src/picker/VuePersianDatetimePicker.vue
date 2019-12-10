@@ -255,24 +255,26 @@
 
                             <br v-if="autoSubmit && (!hasStep('t') || !hasStep('t-a'))">
 
-                            <div :class="[prefix('actions')]" v-else>
-                                <button type="button"
-                                        @click="submit()"
-                                        :disabled="!canSubmit"
-                                        :style="{'color': color}"
-                                >{{ lang.submit }}</button>
-
+                            <div :class="[prefix('actions')]" v-else>                                
                                 <button v-if="!inline"
                                         type="button"
                                         @click="visible=false"
                                         :style="{'color': color}"
                                 >{{ lang.cancel }}</button>
-
                                 <button type="button"
-                                        @click="goToday()"
+                                        @click="submit()"
+                                        :disabled="!canSubmit"
                                         :style="{'color': color}"
-                                        v-if="canGoToday"
-                                >{{ lang.now }}</button>
+                                >{{ lang.submit }}</button> 
+
+                                <!-- 
+                                    
+                                <button v-if="!inline"
+                                        type="button"
+                                        @click="visible=false"
+                                        :style="{'color': color}"
+                                >{{ lang.cancel }}</button>
+                                -->                       
                             </div>
                         </div>
                     </div>
